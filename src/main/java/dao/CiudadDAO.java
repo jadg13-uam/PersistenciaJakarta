@@ -34,7 +34,10 @@ public class CiudadDAO {
         }
     }
 
-
+    /**
+     * Lista todas las ciudades de la base de datos
+     * @return
+     */
     public List<Ciudad> listar(){
         List<Ciudad> ciudades = new ArrayList<>();
 
@@ -46,6 +49,34 @@ public class CiudadDAO {
         }
 
         return ciudades;
+    }
+
+    /**
+     * Busca una ciudad por su id
+     * @param id
+     * @return
+     */
+    public Ciudad buscar(int id){
+        try{
+            EntityManager em = JPAUtil.getEntityManager();
+            return em.find(Ciudad.class, id);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public void eliminar(Ciudad ciudad){
+        try{
+            EntityManager em = JPAUtil.getEntityManager();
+            em.remove(ciudad);
+            em.getTransaction().begin();
+            em.getTransaction().commit();
+            System.out.println("Ciudad eliminada con exito");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 

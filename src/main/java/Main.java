@@ -10,5 +10,14 @@ public class Main {
         for (Ciudad c : reg.listar()) {
             System.out.println(c);
         }
+
+        System.out.println("Registro encontrado: "+ reg.buscar( 3));
+        Ciudad ciudad = reg.buscar(3);
+        reg.eliminar(ciudad);
+
+        System.out.println("Registros despues de eliminar:");
+        for (Ciudad c : reg.listar()) {
+            System.out.println(c);
+        }
     }
 }
