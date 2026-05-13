@@ -4,6 +4,9 @@ import configuracion.JPAUtil;
 import jakarta.persistence.EntityManager;
 import modelos.Ciudad;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CiudadDAO {
     /*
     Create
@@ -12,6 +15,10 @@ public class CiudadDAO {
     Delete
      */
 
+    /**
+     * Guarda una ciudad en la base de datos
+     * @param ciudad
+     */
     public void guardar(Ciudad ciudad){
         EntityManager em = JPAUtil.getEntityManager();
         try{
@@ -27,6 +34,19 @@ public class CiudadDAO {
         }
     }
 
+
+    public List<Ciudad> listar(){
+        List<Ciudad> ciudades = new ArrayList<>();
+
+        EntityManager em = JPAUtil.getEntityManager();
+        try{
+            ciudades = em.createQuery("SELECT c FROM Ciudad c", Ciudad.class).getResultList();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        return ciudades;
+    }
 
 
 }
