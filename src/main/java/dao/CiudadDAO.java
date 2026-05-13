@@ -67,15 +67,21 @@ public class CiudadDAO {
         return null;
     }
 
-    public void eliminar(Ciudad ciudad){
+    /**
+     * Elimina una ciudad por su id
+     * @param id
+     */
+    public void eliminar(int id){
         try{
             EntityManager em = JPAUtil.getEntityManager();
-            em.remove(ciudad);
+            Ciudad temporal = em.find(Ciudad.class, id);
+            em.remove(temporal);
             em.getTransaction().begin();
             em.getTransaction().commit();
             System.out.println("Ciudad eliminada con exito");
         }catch (Exception e){
             e.printStackTrace();
+            System.out.println("Error al eliminar la ciudad" + e.getMessage());
         }
     }
 
