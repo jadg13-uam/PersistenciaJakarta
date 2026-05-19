@@ -13,11 +13,21 @@ public class Main {
 
         //System.out.println("Registro encontrado: "+ reg.buscar( 3));
 
-        reg.eliminar(2);
+        //reg.eliminar(2);
 
         System.out.println("Registros despues de eliminar:");
         for (Ciudad c : reg.listar()) {
             System.out.println(c);
+        }
+
+        // Editar
+        Ciudad ciudadEditar = reg.buscar(1);
+        if(ciudadEditar != null){
+            ciudadEditar.setNombre("Managua");
+            ciudadEditar.setDescripcion("Capital");
+            ciudadEditar.setLatitud(11.97);
+            ciudadEditar.setLongitud(-89.09);
+            reg.editar(ciudadEditar);
         }
     }
 }

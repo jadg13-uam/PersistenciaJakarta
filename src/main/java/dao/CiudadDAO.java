@@ -7,7 +7,7 @@ import modelos.Ciudad;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CiudadDAO {
+public class CiudadDAO implements CRUD<Ciudad>{
     /*
     Create
     Read
@@ -82,6 +82,23 @@ public class CiudadDAO {
         }catch (Exception e){
             e.printStackTrace();
             System.out.println("Error al eliminar la ciudad" + e.getMessage());
+        }
+    }
+
+    public void editar(Ciudad ciudad){
+        EntityManager em = JPAUtil.getEntityManager();
+        try{
+            em.getTransaction().begin();
+            em.merge(ciudad);
+            em.getTransaction().commit();
+            System.out.println("Ciudad editada con éxito");
+        }catch (Exception e){
+            if (em.getTransaction().isActive()){
+                em.getTransaction().rollback();
+            }
+            e.printStackTrace();
+        }finally {
+            em.close();
         }
     }
 
